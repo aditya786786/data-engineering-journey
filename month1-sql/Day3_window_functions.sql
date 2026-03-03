@@ -24,6 +24,15 @@ FROM (
 ) AS order_totals
 ORDER BY total_order_value DESC;
 
+--output:
+
+order_id, total_order_value, row_number_rank, rank_value, dense_rank_value
+1	348.00	1	1	1
+4	299.00	2	2	2
+5	228.99	3	3	3
+2	109.50	4	4	4
+3	80.49	5	5	5
+
 
 
 -- =====================================================
@@ -56,6 +65,17 @@ ORDER BY total_order_value DESC;
 
 
 
+--output: 
+
+customer_name, order_id, total_order_value
+Alice Vance	1	348.00
+Bob Miller	2	109.50
+Charlie Day	3	80.49
+Diana Prince	4	299.00
+Evan Wright	5	228.99
+
+
+
 -- =====================================================
 -- 3. Top 2 Orders Per Customer
 -- =====================================================
@@ -85,6 +105,14 @@ WHERE row_num <= 2
 ORDER BY customer_name, total_order_value DESC;
 
 
+--output: 
+customer_name, order_id, total_order_value
+Alice Vance	1	348.00
+Bob Miller	2	109.50
+Charlie Day	3	80.49
+Diana Prince	4	299.00
+Evan Wright	5	228.99
+
 
 -- =====================================================
 -- 4. Daily Revenue & Running Total
@@ -110,3 +138,8 @@ SELECT
     ) AS cumulative_revenue
 FROM DailyRevenue
 ORDER BY order_date;
+
+
+--output:
+order_date, daily_revenue, cumulative_revenue
+2026-03-01	1065.98	1065.98
